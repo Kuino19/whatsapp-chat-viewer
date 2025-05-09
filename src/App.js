@@ -4,36 +4,29 @@ import './App.css';
 function App() {
   const [parsedChats, setParsedChats] = useState([]);
   const [error, setError] = useState('');
-  const [chatFileUrl, setChatFileUrl] = useState(null);
   
-  // Load the chat file when the component mounts
+  // Hardcoded chat data from _chat.txt
+  const defaultChatData = `[10/04/2025, 17:57:16] Abiodun: ‎Messages and calls are end-to-end encrypted. Only people in this chat can read, listen to, or share them.
+[10/04/2025, 17:57:16] Abiodun: ‎Abiodun is a contact.
+[10/04/2025, 17:56:07] Abiodun: Good evening favour
+[10/04/2025, 18:06:45] Favour: Evening
+[10/04/2025, 18:29:05] Abiodun: How are you doing, guess you're home now.
+[10/04/2025, 18:37:29] Favour: Fine
+[10/04/2025, 18:37:33] Favour: You ?
+[10/04/2025, 18:37:36] Favour: Yes
+[10/04/2025, 18:38:07] Abiodun: Good, how come we haven't see each other all these while
+[10/04/2025, 18:38:56] Favour: I don't go out
+[10/04/2025, 18:41:49] Abiodun: Wow! God want us to see today that's why he allow you to go out`;
+  
+  // Load the default chat data when the component mounts
   useEffect(() => {
-    // Load the provided chat file
-    const loadDefaultChat = async () => {
-      try {
-        // Get the base URL for the current environment (local or GitHub Pages)
-        const baseUrl = process.env.PUBLIC_URL || '';
-        // Load the chat.txt file from the public directory
-        const chatFilePath = `${baseUrl}/chat.txt`;
-        
-        console.log('Attempting to load chat file from:', chatFilePath);
-        
-        const response = await fetch(chatFilePath);
-        if (!response.ok) {
-          throw new Error(`Failed to load chat file: ${response.status} ${response.statusText}`);
-        }
-        
-        const text = await response.text();
-        console.log('Successfully loaded chat file');
-        parseWhatsAppChat(text);
-      } catch (err) {
-        console.error('Error loading default chat:', err);
-        setError('Error loading the default chat file. You can upload a chat file manually.');
-      }
-    };
-    
-    // Load the chat file automatically
-    loadDefaultChat();
+    try {
+      console.log('Loading default chat data');
+      parseWhatsAppChat(defaultChatData);
+    } catch (err) {
+      console.error('Error parsing default chat data:', err);
+      setError('Error loading the default chat. You can upload a chat file manually.');
+    }
   }, []);
 
   const parseWhatsAppChat = (text) => {
