@@ -11,8 +11,12 @@ function App() {
     // Load the provided chat file
     const loadDefaultChat = async () => {
       try {
+        // Get the base URL for the current environment (local or GitHub Pages)
+        const baseUrl = process.env.PUBLIC_URL || '';
         // Load the chat.txt file from the public directory
-        const chatFilePath = '/chat.txt';
+        const chatFilePath = `${baseUrl}/chat.txt`;
+        
+        console.log('Attempting to load chat file from:', chatFilePath);
         
         const response = await fetch(chatFilePath);
         if (!response.ok) {
