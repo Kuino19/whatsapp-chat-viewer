@@ -19,7 +19,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://kuino19.github.io/whatsapp-chat-viewer",
+  "homepage": "https://kuino19.github.io/whatsapp-chat-viewer/",
   "eslintConfig": {
     "extends": [
       "react-app"
